@@ -1,13 +1,13 @@
-import 'semantic-ui-css/semantic.min.css';
-import { Form, Button } from 'semantic-ui-react';
-import { useForm } from 'react-hook-form';
+import 'semantic-ui-css/semantic.min.css'
+import { Form, Button } from 'semantic-ui-react'
+import { useForm } from 'react-hook-form'
 import axios from 'axios';
 
 const Formulario = () =>{
 
     const URL = process.env.REACT_APP_URL;
-    console.log(URL);
 
+    
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: { 
             nombre: '',
@@ -16,15 +16,14 @@ const Formulario = () =>{
             password: ''
         }
     });
-
-
-
+    
     const onSubmit = (datos, e) =>{
         e.preventDefault();
         try {
             console.log(datos);
             axios.post(URL, datos)
             e.target.reset();
+            console.log(URL);
         } catch (error) {
             console.log(error);
         }
@@ -37,9 +36,9 @@ const Formulario = () =>{
 
 
     return (
-        <>
+        <div className="App">
             <h1>Formulario de Registro</h1>
-            <Form onSubmit={handleSubmit(onSubmit)} >
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Field>
                     <label>Nombre: </label>
                     <input 
@@ -81,16 +80,12 @@ const Formulario = () =>{
                         {...register('email', 
                         {
                             required: true,
-                        pattern:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                            /* pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ */
                         })
                         }
-
-                        
-
-
                     />
                 </Form.Field>
-                { errors.email && <p className="errores">El email es obligatorio</p>}
+                {errors.email && <p className="errores">El email es obligatorio</p>}
 
                 <Form.Field>
                     <label>Password: </label>
@@ -101,7 +96,7 @@ const Formulario = () =>{
                         {...register('password',
                         {
                             required: true,
-                            pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/
+                            /* pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/ */
                         })
                         }   
                     />
@@ -110,7 +105,7 @@ const Formulario = () =>{
 
                 <div className='centrar'>
                         <Button.Group>
-                            <Button type='button' onClick={() => reset()} primary >Limpiar Formulario</Button>
+                            <Button type='button' onClick={() => reset()} primary>Limpiar Formulario</Button>
                             <Button.Or />
                             <Button type='submit' positive>Enviar Datos</Button>
                         </Button.Group>
@@ -120,9 +115,8 @@ const Formulario = () =>{
                     */}
                 </div>
             </Form>
-        </>
+        </div>
     )}
-
 
 
 export default Formulario;

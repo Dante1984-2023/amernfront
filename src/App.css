@@ -1,3 +1,4 @@
+
 .App{
   width: 60vw;
   margin: 15vh auto;
@@ -9,7 +10,9 @@
 
 .errores{
   color: red;
+  text-align: center;
 }
+
 
 .App-header {
   background-color: #282c34;
